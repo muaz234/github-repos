@@ -12,6 +12,11 @@ const GitHubRepos = ({ days }) => {
   const [totalCount, setTotalCount] = useState(0);
 
   useEffect(() => {
+    // change to page 1 when days change
+    setPage(1);
+  }, [days]);
+
+  useEffect(() => {
     const fetchRepos = async () => {
       const date = new Date();
       date.setDate(date.getDate() - days);
