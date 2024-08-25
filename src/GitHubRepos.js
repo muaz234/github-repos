@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { List, ListItem, Card, CardContent, Typography, Link, Button, Box, CircularProgress } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import axios from 'axios'; 
 
 const GitHubRepos = ({ days }) => {
   const [repos, setRepos] = useState([]);
@@ -18,17 +19,14 @@ const GitHubRepos = ({ days }) => {
 
       try {
         setLoading(true);
-        const response = await fetch(
-          `https://api.github.com/search/repositories?q=created:>${formattedDate}&sort=stars&order=desc&page=${page}&per_page=10`
-        );
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        setRepos(data.items);
-        setTotalCount(data.total_count);
+        const response = await axios.get(
+            `https://api.github.com/search/repositories?q=created:>${formattedDate}&sort=stars&order=desc&page=${page}&per_page=10`
+          );
+        const data = response?.data;
+        setRepos(data?.items);
+        setTotalCount(data?.total_count);
       } catch (error) {
-        setError(error.message);
+        setError(error?.message);
       } finally {
         setLoading(false);
       }
@@ -74,47 +72,32 @@ const GitHubRepos = ({ days }) => {
     <Box>
       <List>
         {repos.map(repo => (
-          <ListItem key={repo.id} disablePadding>
-            {/* <Card sx={{ width: '100%', marginBottom: 2 }}>
-              <CardContent>
-                <Typography variant="h6" component="div">
-                  {repo.name}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {repo.description}
-                </Typography>
-                <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', marginTop: 1 }}>
-                  <StarIcon sx={{ marginRight: 0.5 }} /> {repo.stargazers_count}
-                </Typography>
-                <Link href={repo.html_url} target="_blank" rel="noopener" variant="body2" sx={{ marginTop: 1, display: 'block' }}>
-                  View Repository
-                </Link>
-              </CardContent>
-            </Card> */}
-            <Card sx={{ width: '100%', marginBottom: 2 }}>
+          <ListItem key={repo?.id} disablePadding>
+             <Card sx={{ width: '100%', marginBottom: 2, borderRadius: 2, boxShadow: 3 }}>
               <CardContent sx={{ display: 'flex', alignItems: 'center' }}>
                 <Box
                   component="img"
-                  src={repo.owner.avatar_url}
-                  alt={repo.owner.login}
+                  src={repo?.owner?.avatar_url}
+                  alt={repo?.owner?.login}
                   sx={{ width: 50, height: 50, borderRadius: '50%', marginRight: 2 }}
                 />
                 <Box sx={{ flex: 1 }}>
                   <Typography variant="h6" component="div">
-                    {repo.name}
+                    {repo?.name}
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    {repo.description}
+                    {repo?.description}
                   </Typography>
                 </Box>
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <StarIcon sx={{ marginRight: 0.5 }} /> {repo.stargazers_count}
-                </Box>
+               
               </CardContent>
-              <Box sx={{ padding: 2 }}>
-                <Link href={repo.html_url} target="_blank" rel="noopener" variant="body2">
+              <Box sx={{ padding: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <Link href={repo?.html_url} target="_blank" rel="noopener" variant="body2">
                   View Repository
                 </Link>
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                  <StarIcon sx={{ marginRight: 0.5 }} /> {repo?.stargazers_count}
+                </Box>
               </Box>
             </Card>
           </ListItem>

@@ -13,15 +13,15 @@ function App() {
   return (
     <Box
       sx={{
-        width: '25vw',       // 25% of the viewport width for the container
-        minWidth: '250px',    // Minimum width for smaller screens
-        margin: '0 auto',     // Center the container
-        padding: '16px',      // Padding for inner content
+        width: '25vw',      
+        minWidth: '250px',    
+        margin: '0 auto',    
+        padding: '16px',      
       }}
     >
       <Box
         sx={{
-          height: '20vh',     // 20% of the viewport height for the header
+          height: '20vh',     
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
