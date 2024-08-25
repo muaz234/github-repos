@@ -22,9 +22,9 @@ const GitHubRepos = ({ days }) => {
         const response = await axios.get(
             `https://api.github.com/search/repositories?q=created:>${formattedDate}&sort=stars&order=desc&page=${page}&per_page=10`
           );
-        const data = response?.data;
-        setRepos(data?.items);
-        setTotalCount(data?.total_count);
+          const data = response?.data;
+          setRepos(data?.items);
+          setTotalCount(data?.total_count);
       } catch (error) {
         setError(error?.message);
       } finally {
