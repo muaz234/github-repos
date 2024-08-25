@@ -13,25 +13,26 @@ function App() {
   return (
     <Box
       sx={{
-        width: '25vw',      
-        minWidth: '250px',    
+        width: '90%',      
+        maxWidth: '600px',    
         margin: '0 auto',    
         padding: '16px',      
+        boxSizing: 'border-box', // Ensures padding is included in width calculation
       }}
     >
       <Box
         sx={{
-          height: '20vh',     
+          height: 'auto',     
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'center',
           alignItems: 'center',
+          marginBottom: 3,
         }}
       >
-        <Typography variant="h4" component="h1">
+        <Typography variant="h4" component="h1" align="center" sx={{ marginBottom: 2 }}>
           Most Starred GitHub Repositories
         </Typography>
-        <Box sx={{ marginTop: 3, marginBottom: 3, width: '100%' }}>
+        <Box sx={{ width: '100%' }}>
           <FormControl fullWidth>
             <InputLabel id="days-select-label">Number of days</InputLabel>
             <Select
