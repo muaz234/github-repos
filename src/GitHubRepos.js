@@ -166,9 +166,9 @@ const GitHubRepos = ({ days }) => {
         ))}
       </List>
 
-      <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'space-between', marginTop: 2 }}>
+      <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 2 }}>
         <Button variant="contained" onClick={handlePrevPage} disabled={page === 1}>
-          Previous
+          Prev
         </Button>
         <Typography variant="body2" sx={{ alignSelf: 'center', textAlign: { xs: 'center', sm: 'left' } }}>
           Page {page}

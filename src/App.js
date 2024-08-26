@@ -17,7 +17,7 @@ function App() {
         maxWidth: '600px',    
         margin: '0 auto',    
         padding: '16px',      
-        boxSizing: 'border-box', // Ensures padding is included in width calculation
+        boxSizing: 'border-box'
       }}
     >
       <Box
@@ -26,7 +26,7 @@ function App() {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          marginBottom: 3,
+          marginBottom: 3
         }}
       >
         <Typography variant="h4" component="h1" align="center" sx={{ marginBottom: 2 }}>
